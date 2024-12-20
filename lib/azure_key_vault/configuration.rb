@@ -1,24 +1,30 @@
+# lib/azure_key_vault/configuration.rb
+
 module AzureKeyVault
   class Configuration
-    attr_accessor :azure_tenant_id, :azure_client_id, :azure_client_secret, :azure_subscription_id, :vault_base_url, :api_version, :resource
+    attr_accessor :vault_base_url,
+                  :azure_tenant_id,
+                  :azure_client_id,
+                  :azure_client_secret,
+                  :resource,
+                  :api_version
 
+    # Initializes the default configuration settings
     def initialize
-      @azure_tenant_id = "53968008-5788-432d-9c98-870db638088a"
-      @azure_client_id = "f78e0cb1-c607-409e-b306-ef5e9a9374d0"
-      @azure_client_secret = "l1Y8Q~aZta90h1eMmCns0QOVHPuyOFVf1roeJbSm"
-      @azure_subscription_id = "e08888ad-1ba0-4bac-a58e-6cde64618ed3"
-      @vault_base_url = "https://stagevaultmkx.vault.azure.net/"
-      @api_version = "7.4"
-      @resource = "https://vault.azure.net"
+      @vault_base_url    = nil
+      @azure_tenant_id   = nil
+      @azure_client_id   = nil
+      @azure_client_secret = nil
+      @resource          = "https://vault.azure.net"  # Default Azure Key Vault resource URL
+      @api_version       = "7.0"  # Default API version for Azure Key Vault
     end
   end
 
-  # Set the global configuration instance
+  # Global configuration instance
   def self.configuration
     @configuration ||= Configuration.new
   end
 
-  # Configure the global configuration instance
   def self.configure
     yield(configuration)
   end
